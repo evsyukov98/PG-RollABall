@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
         {
             IsGrounded = false;
         }
-       
     }
 
     private void Jump()
