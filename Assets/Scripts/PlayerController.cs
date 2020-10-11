@@ -5,6 +5,8 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform WorldPoint;
+    
     public float speed;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
@@ -17,10 +19,14 @@ public class PlayerController : MonoBehaviour
     public int jumpForce = 5;
     public bool IsGrounded;
     public int extraJumps;
-    public int extraJumpvalue = 2;
+    public int extraJumpValue = 2;
+
+    public InputAction a;
 
     void Start()
     {
+        a.performed += _ => Jump();
+        
         rb = GetComponent<Rigidbody>();
 
         count = 0;
@@ -28,11 +34,25 @@ public class PlayerController : MonoBehaviour
         SetCountText();
     }
 
+    private void Update()
+    {
+        GroundCheker();
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+
+        rb.AddForce(movement * speed);
+
+    }
+
     void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         movementX = movementVector.x;
+
         movementY = movementVector.y;
     }
 
@@ -40,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         int checker = 0;
         
-        foreach(Collider collider in Physics.OverlapSphere(transform.position, 1.1f))
+        foreach(Collider collider in Physics.OverlapSphere(transform.position, 1f))
         {
             if (collider.tag == "Ground")
             {
@@ -51,6 +71,7 @@ public class PlayerController : MonoBehaviour
         if(checker > 0)
         {
             IsGrounded = true;
+            extraJumps = extraJumpValue;
         }
         else
         {
@@ -59,24 +80,16 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    private void Update()
+    private void Jump()
     {
-        GroundCheker();
+        Debug.Log("try jump!!");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded || extraJumps > 0)
         {
-            Debug.Log("space");
-            Vector3 JumpVector = this.transform.position + Vector3.up;
-            rb.AddForce(JumpVector * jumpForce);
+            rb.AddForce(Vector3.up * jumpForce);
+
+            extraJumps--;
         }
-    }
-    void FixedUpdate()
-    {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
-        rb.AddForce(movement * speed);
-
-        
     }
 
     void SetCountText()
@@ -99,5 +112,10 @@ public class PlayerController : MonoBehaviour
 
             SetCountText();
         }      
+    }
+
+    private void OnEnable()
+    {
+        a.Enable();
     }
 }
