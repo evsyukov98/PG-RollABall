@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro;
-using System.Security.Principal;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
-{
-    public Transform WorldPoint;
-    
+{    
     public float speed;
+
+    public int jumpForce = 5;
+
     public TextMeshProUGUI countText;
+
     public GameObject winTextObject;
 
     private Rigidbody _rigidBody;
-    private int count = 0;
 
-    public int jumpForce = 5;
-    public bool IsGrounded;
-    public int extraJumps;
-    public int extraJumpValue = 2;
+    private int _countToWin = 0;
+
+    private bool _isGrounded;
+
+    private int _extraJumps;
+
+    private int _extraJumpValue = 2;
 
     private PlayerInput _playerInput;
 
@@ -29,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Start()
+    private void Start()
     {   
         _rigidBody = GetComponent<Rigidbody>();
 
@@ -48,7 +52,8 @@ public class PlayerController : MonoBehaviour
     void Move(Vector2 direction)
     {
         Vector3 dirVector3 = new Vector3(direction.x, 0f, direction.y);
-        _rigidBody.AddForce(dirVector3 * speed );
+
+        _rigidBody.AddForce(dirVector3 * speed);
     }
 
     void GroundCheker()
@@ -65,34 +70,34 @@ public class PlayerController : MonoBehaviour
 
         if(checker > 0)
         {
-            IsGrounded = true;
-            extraJumps = extraJumpValue;
+            _isGrounded = true;
+            _extraJumps = _extraJumpValue;
         }
         else
         {
-            IsGrounded = false;
+            _isGrounded = false;
         }
     }
 
     private void Jump()
     {
-        Debug.Log("try jump!!");
-
-        if (IsGrounded || extraJumps > 0)
+        if (_isGrounded || _extraJumps > 0)
         {
             _rigidBody.AddForce(Vector3.up * jumpForce);
 
-            extraJumps--;
+            _extraJumps--;
         }
     }
 
     void SetCountText()
     {
-        countText.text = "Count: " + count.ToString();
+        countText.text = "Count: " + _countToWin.ToString();
 
-        if (count >= 12)
+        if (_countToWin >= 12)
         {
             winTextObject.SetActive(true);
+
+            StartCoroutine(RestartGame());
         }
     }
 
@@ -102,10 +107,18 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
 
-            count = count + 1;
+            _countToWin = _countToWin + 1;
 
             SetCountText();
         }      
+    }
+
+    IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene(0);
+
     }
 
     private void OnEnable()
