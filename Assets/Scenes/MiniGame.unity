@@ -785,7 +785,6 @@ GameObject:
   - component: {fileID: 798760200}
   - component: {fileID: 798760199}
   - component: {fileID: 798760198}
-  - component: {fileID: 798760204}
   - component: {fileID: 798760203}
   m_Layer: 0
   m_Name: Player
@@ -881,8 +880,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1195591533}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &798760203
 MonoBehaviour:
@@ -896,7 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7057142aa256324fa1b7a850b26ef9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldPoint: {fileID: 1195591533}
+  WorldPoint: {fileID: 0}
   speed: 55
   countText: {fileID: 1805229597}
   winTextObject: {fileID: 2129767080}
@@ -904,53 +903,6 @@ MonoBehaviour:
   IsGrounded: 0
   extraJumps: 0
   extraJumpValue: 1
-  a:
-    m_Name: A
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e93e57e9-00ef-4df4-ab2d-ecdbcda2474e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 217e6989-3c85-45d7-bfe0-a1e2a5dbbf76
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: A
-      m_Flags: 0
---- !u!114 &798760204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798760197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 64365b151474ba64ba65a82c8211df9e,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1001 &826178893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1213,37 +1165,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1158444779}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1195591532
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1195591533}
-  m_Layer: 0
-  m_Name: PlayerWorldPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1195591533
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195591532}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 798760202}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1255294186
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-
+using System.Security.Principal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,49 +11,44 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
-    private Rigidbody rb;
-    private int count;
-    private float movementX;
-    private float movementY;
+    private Rigidbody _rigidBody;
+    private int count = 0;
 
     public int jumpForce = 5;
     public bool IsGrounded;
     public int extraJumps;
     public int extraJumpValue = 2;
 
-    public InputAction a;
+    private PlayerInput _playerInput;
+
+    private void Awake()
+    {
+        _playerInput = new PlayerInput();
+
+        _playerInput.Player.Jump.performed += _ => Jump();
+
+    }
 
     void Start()
-    {
-        a.performed += _ => Jump();
-        
-        rb = GetComponent<Rigidbody>();
-
-        count = 0;
+    {   
+        _rigidBody = GetComponent<Rigidbody>();
 
         SetCountText();
     }
 
     private void Update()
     {
+        Vector2 moveDirection = _playerInput.Player.Move.ReadValue<Vector2>();
+
+        Move(moveDirection);
+
         GroundCheker();
     }
 
-    void FixedUpdate()
+    void Move(Vector2 direction)
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
-        rb.AddForce(movement * speed);
-
-    }
-
-    void OnMove(InputValue movementValue)
-    {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        movementX = movementVector.x;
-
-        movementY = movementVector.y;
+        Vector3 dirVector3 = new Vector3(direction.x, 0f, direction.y);
+        _rigidBody.AddForce(dirVector3 * speed );
     }
 
     void GroundCheker()
@@ -85,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsGrounded || extraJumps > 0)
         {
-            rb.AddForce(Vector3.up * jumpForce);
+            _rigidBody.AddForce(Vector3.up * jumpForce);
 
             extraJumps--;
         }
@@ -115,6 +110,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        a.Enable();
+        _playerInput.Enable();
     }
 }
