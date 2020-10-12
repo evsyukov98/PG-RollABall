@@ -1,20 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace TestForMe
 {
-    public GameObject player;
-    // Расстояние до шара
-    private Vector3 offset;
 
-    void Start()
+    public sealed class CameraController : MonoBehaviour
     {
-        offset = transform.position - player.transform.position;
+
+        [SerializeField] private GameObject player = default;
+
+        // Расстояние до шара
+        private Vector3 _offset;
+
+        private void Start()
+        {
+            _offset = transform.position - player.transform.position;
+        }
+
+        private void LateUpdate()
+        {
+            transform.position = player.transform.position + _offset;
+        }
+
     }
 
-    void LateUpdate()
-    {
-        transform.position = player.transform.position + offset;
-    }
 }

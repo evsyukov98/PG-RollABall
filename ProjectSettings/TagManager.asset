@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickUp
   - Ground
+  - DeadZone
   layers:
   - Default
   - TransparentFX

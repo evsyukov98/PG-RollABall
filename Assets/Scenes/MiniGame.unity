@@ -679,6 +679,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 445694137}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &663870153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 663870156}
+  - component: {fileID: 663870155}
+  - component: {fileID: 663870154}
+  m_Layer: 0
+  m_Name: DeadZone
+  m_TagString: DeadZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &663870154
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663870153}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &663870155
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663870153}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &663870156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663870153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768667536
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,14 +948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7057142aa256324fa1b7a850b26ef9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldPoint: {fileID: 0}
   speed: 55
+  jumpForce: 2000
   countText: {fileID: 1805229597}
   winTextObject: {fileID: 2129767080}
-  jumpForce: 2000
-  IsGrounded: 0
-  extraJumps: 0
-  extraJumpValue: 1
 --- !u!1001 &826178893
 PrefabInstance:
   m_ObjectHideFlags: 0
